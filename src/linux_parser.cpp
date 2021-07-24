@@ -247,25 +247,30 @@ string LinuxParser::Uid(int pid) {
   }
   return "0";
 }
-//Get the user associated with a process
-string LinuxParser::User(int pid) {
-  std::string token, user, line, x, uid, name;
-  std::ifstream stream(LinuxParser::kPasswordPath);
-  if (stream.is_open()) {
-    while (std::getline(stream, line)) {
+
+
+//Read and return the user associated with a process
+string LinuxParser::User(int pid){
+  string pidString = Uid(pid);
+  string line, name, x, pidValue;
+  std::ifstream fileStream(kPasswordPath);
+  if(fileStream.is_open()){
+    while (std::getline(fileStream, line)) {
       //Replace each instance of ":" with a space
       std::replace(line.begin(), line.end(), ':', ' ');
       std::istringstream linestream(line);
       //Then parse for tokens
-      while(linestream >> name >> x >> uid){
-        if (uid == to_string(pid)){
+      while(linestream >> name >> x >> pidValue){
+        if (pidString == pidValue){
+          fileStream.close();
           return name;
         }
       }
-    }
+    } 
   }
   return "0";
 }
+
 
 // Read and return the  uptime for a particular process
 long int LinuxParser::UpTime(int pid) {
@@ -280,7 +285,7 @@ long int LinuxParser::UpTime(int pid) {
       if (i == 22) {
         long int upTime{stol(token)};
         upTime /= sysconf(_SC_CLK_TCK);
-        upTime = stol(Format::ElapsedTime(upTime));
+        //upTime = stol(Format::ElapsedTime(upTime));
         return upTime;
       }
   }
