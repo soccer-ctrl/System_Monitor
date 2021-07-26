@@ -5,6 +5,7 @@
 #include <vector>
 #include "linux_parser.h"
 #include "format.h"
+#include "time.h"   
 
 using std::stof;
 using std::string;
@@ -271,23 +272,27 @@ string LinuxParser::User(int pid){
   return "0";
 }
 
-
 // Read and return the  uptime for a particular process
 long int LinuxParser::UpTime(int pid) {
-  long int upTime = 0;
-  string token;
-  std::ifstream stream(LinuxParser::kProcDirectory + 
+  string token, line;
+  vector <string> tokens;
+  std::ifstream fileStream(LinuxParser::kProcDirectory + 
                       to_string(pid) +
                       LinuxParser::kStatFilename);
-  if (stream.is_open()) {
-    for (int i = 0; stream >> token; ++i)
-      //The start time (in clock ticks) is the 22nd value
-      if (i == 22) {
-        long int upTime{stol(token)};
-        upTime /= sysconf(_SC_CLK_TCK);
-        //upTime = stol(Format::ElapsedTime(upTime));
-        return upTime;
+  if (fileStream.is_open()) {
+    while (std::getline(fileStream, line)) {
+      std::istringstream linestream(line);
+      while(linestream >> token){
+        tokens.push_back(token);
       }
+    }
   }
-  return upTime;
+  try{
+    //The process start time (in clock ticks) was the 22nd token
+    //(so vector positon 21)
+    long int procStartTime = stol(tokens[21]) / sysconf(_SC_CLK_TCK);
+    //Calculate and return the total elapsed time since the process started
+    long int sysUpTime = UpTime();
+    return sysUpTime - procStartTime;
+  }catch(...){ return 0;}
 }
