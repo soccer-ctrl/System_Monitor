@@ -18,6 +18,26 @@ const std::string kVersionFilename{"/version"};
 const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
+//Templates
+//Generic function to find a value in a file by searching for a preceeding key (space separated tokens)
+template <typename T> T findValueByKey(std::string const &keyFinder, std::string const &filename) {
+  std::string line, key;
+  T value;
+  std::ifstream fileStream(filename);
+  if (fileStream.is_open()) {
+    while (std::getline(fileStream, line)) {
+      std::istringstream linestream(line);
+      while (linestream >> key >> value) {
+        if (key == keyFinder) {
+          return value;
+        }
+      }
+    }
+  }
+  fileStream.close();
+  return value;
+};
+
 // System
 float MemoryUtilization();
 long UpTime();
