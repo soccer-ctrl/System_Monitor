@@ -27,16 +27,16 @@ idled = Idle - PrevIdle
 CPU_Percentage = (totald - idled)/totald
 
 */
-float Processor::Utilization() {
-    float cpuPercentage = 0.0;
-    float nonIdle = LinuxParser::ActiveJiffies();
-    float idle = LinuxParser::IdleJiffies();
+double Processor::Utilization() {
+    double cpuPercentage = 0.0;
+    double nonIdle = LinuxParser::ActiveJiffies();
+    double idle = LinuxParser::IdleJiffies();
 
     //Calcualate and return the CPU percentage
-    float prevTotal = cached_idle_ticks_ + cached_active_ticks_;
-    float total = idle + nonIdle;  
-    float totalD = total - prevTotal;
-    float idleD = idle - cached_idle_ticks_;
+    double prevTotal = cached_idle_ticks_ + cached_active_ticks_;
+    double total = idle + nonIdle;  
+    double totalD = total - prevTotal;
+    double idleD = idle - cached_idle_ticks_;
 
     cpuPercentage = (totalD - idleD) / totalD;
 
