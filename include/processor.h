@@ -6,13 +6,13 @@ using std::vector;
 
 class Processor {
  public:
-  float Utilization();  
+  double Utilization();  
 
 
  private:
  std::vector<std::string> cpuUtilization = {};
 
- vector<float> getCpuTime(const vector<std::string>&);
+ vector<double> getCpuTime(const vector<std::string>&);
   long cached_active_ticks_;
   long cached_idle_ticks_;
 
