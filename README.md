@@ -3,6 +3,7 @@ System_Monitor is a program for Linux that displays crucial information about th
 
 This program was developed as a contribution to a Udacity C++ nanodegree.
 
+
 ## Installation
 Clone the Git repository, and install using:
 1. mkdir build
@@ -10,11 +11,14 @@ Clone the Git repository, and install using:
 3. cmake ..
 4. make 
 
+
 ## Usage
 Run the "monitor" executable in the build directory. 
 
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
