@@ -1,8 +1,8 @@
 # System_Monitor
 
-System_Monitor is a program for Linux that displays crucial information about the systems' processes. This includes poces ID, user, CPU Utilisation, memory utilisation, process uptime, and the process command. this is displayed on the terminal using ncurses (https://invisible-island.net/ncurses/).
+System_Monitor is a program for Linux that displays crucial information about the system's processes. This includes process ID, user, CPU utilisation, memory utilisation, process uptime, and the process command. This information is displayed on the terminal using ncurses (https://invisible-island.net/ncurses/).
 
-This program was developed as a contribution to a Udacity C++ nanodegree
+This program was developed as a contribution to a Udacity C++ nanodegree.
 
 
 ## Installation
