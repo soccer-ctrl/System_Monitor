@@ -1,7 +1,5 @@
 # System_Monitor
 
-Foobar is a Python library for dealing with word pluralization.
-
 System_Monitor is a program for Linux that displays crucial information about the systems' processes. This includes poces ID, user, CPU Utilisation, memory utilisation, process uptime, and the process command. this is displayed on the terminal using ncurses (https://invisible-island.net/ncurses/).
 
 This program was developed as a contribution to a Udacity C++ nanodegree
