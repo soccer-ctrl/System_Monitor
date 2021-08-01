@@ -35,7 +35,7 @@ string LinuxParser::OperatingSystem() {
   return value;
 }
 
-// DONE: An example of how to read data from the filesystem
+// Read data from filesystem
 string LinuxParser::Kernel() {
   string os, version, kernel;
   string line;
